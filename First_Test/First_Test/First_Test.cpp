@@ -36,16 +36,26 @@ GLFWwindow* initialize_glfw() {
 
 }
 
-
 void load_geometry(GLuint* vao, GLuint* vbo, GLsizei* vertex_count) {
     // Send the vertex data to the GPU
     {
         // Generate the data on the CPU
         GLfloat vertices[] = {
-             0.0f, 0.5f, 0.0f, // top center
+             -0.5f,  0.5f, 0.0f,  // top left
              0.5f, -0.5f, 0.0f, // bottom right
             -0.5f, -0.5f, 0.0f, // bottom left
+             0.5f,  0.5f, 0.0f,    //upper right  SECOND TRIANGLE 
+             -0.5f,  0.5f, 0.0f,  //top left 
+             0.5f, -0.5f, 0.0f, // bottom right
+
         };
+
+        /* Triangle data
+            0.0f, 0.5f, 0.0f, // top center
+             0.5f, -0.5f, 0.0f, // bottom right
+            -0.5f, -0.5f, 0.0f, // bottom left
+        */
+
         *vertex_count = sizeof(vertices) / sizeof(vertices[0]);
 
         // Use OpenGL to store it on the GPU
@@ -175,9 +185,15 @@ int main(void)
 
     load_geometry(&VertexArrayID,&VertexArrayID,&vertex_count);
 
+    GLint x = 0;
+    GLint y = 0;
+
     while (!glfwWindowShouldClose(window)) {
+        glViewport(x,y,640,480); //moving the camera gives motion to the rectangle/triangle 
         render_scene(window,vertex_count);
         glfwPollEvents();
+        x += 1;
+        y += 1;
     }
 
     cleanup(window);
