@@ -1,0 +1,1 @@
+I've finished the triangle, therefore I did a rectangle and I added some motion to it with the glViewport function (you can see it in the main)

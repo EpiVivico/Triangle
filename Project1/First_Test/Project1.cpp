@@ -185,15 +185,15 @@ int main(void)
 
     load_geometry(&VertexArrayID,&VertexArrayID,&vertex_count);
 
-    GLint x = 0;
-    GLint y = 0;
+    GLfloat x = 0;
+    GLfloat y = 0;
 
     while (!glfwWindowShouldClose(window)) {
         glViewport(x,y,640,480); //moving the camera gives motion to the rectangle/triangle 
         render_scene(window,vertex_count);
         glfwPollEvents();
-        x += 1;
-        y += 1;
+        x += 0.003;
+        y += 0.003;
     }
 
     cleanup(window);
